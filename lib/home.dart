@@ -88,8 +88,9 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   void showNotification(message) async {
+    //todo change ios package later
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-      Platform.isAndroid ? 'com.dfa.flutterchatdemo' : 'com.duytq.flutterchatdemo',
+      Platform.isAndroid ? 'com.vcc.flutterlogin' : 'com.vcc.flutterlogin',
       'Flutter chat demo',
       'your channel description',
       playSound: true,
