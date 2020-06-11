@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutterlogin/home.dart';
 import 'package:flutterlogin/sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'first_screen.dart';
 
@@ -9,6 +11,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initPreps();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,10 +49,11 @@ class _LoginPageState extends State<LoginPage> {
       splashColor: Colors.grey,
       onPressed: () {
         signInWithGoogle().whenComplete(() {
+          _handleSignIn();
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) {
-                return FirstScreen();
+                return HomeScreen(currentUserId: currentUserId,);
               },
             ),
           );
@@ -66,5 +82,15 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _handleSignIn() async {
+    await prefs.setString('id', currentUserId);
+    await prefs.setString('nickname', name);
+    await prefs.setString('photoUrl', imageUrl);
+  }
+
+  void initPreps() async {
+    prefs = await SharedPreferences.getInstance();
   }
 }

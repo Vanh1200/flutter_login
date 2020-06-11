@@ -8,6 +8,7 @@ final GoogleSignIn googleSignIn = GoogleSignIn();
 String name;
 String email;
 String imageUrl;
+String currentUserId;
 
 Future<String> signInWithGoogle() async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -30,6 +31,7 @@ Future<String> signInWithGoogle() async {
   name = user.displayName;
   email = user.email;
   imageUrl = user.photoUrl;
+  currentUserId = user.uid;
 
   final QuerySnapshot result =
   await Firestore.instance.collection('users').where('id', isEqualTo: user.uid).getDocuments();
