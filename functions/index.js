@@ -38,7 +38,7 @@ exports.sendNotification = functions.firestore
                       title: `You have a message from "${userFrom.data().nickname}"`,
                       body: contentMessage,
                       badge: '1',
-                      sound: 'default'
+                      sound: 'messenger.mp3'
                     }
                   }
                   // Let push to the target device

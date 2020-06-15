@@ -45,8 +45,8 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    registerNotification();
     configLocalNotification();
+    registerNotification();
   }
 
   void registerNotification() {
